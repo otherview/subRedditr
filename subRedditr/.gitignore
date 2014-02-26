@@ -1,0 +1,4 @@
+# Can ignore specific files
+*.db
+.idea
+*.komodoproject
