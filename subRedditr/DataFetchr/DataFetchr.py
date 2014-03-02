@@ -47,22 +47,22 @@ class DataFetchr:
                 htmlTopic = responseTopic.read()
                 final_data.append(json.loads(htmlTopic))
                 topicData = final_data[0][0]['data']['children'][0]['data']
-                print "\n--- Thread---"
-                print "autor :"+str(topicData['author'])
-                print "id Thread :" + str(topicData['id'])
-                print "subreddit Thread :" + str(topicData['subreddit'])
-                print "score Thread :" + str(topicData['score'])
-                print "#comment Thread :" + str(topicData['num_comments'])
-                print "\n"
+                #print "\n--- Thread---"
+                #print "autor :"+str(topicData['author'])
+                #print "id Thread :" + str(topicData['id'])
+                #print "subreddit Thread :" + str(topicData['subreddit'])
+                #print "score Thread :" + str(topicData['score'])
+                #print "#comment Thread :" + str(topicData['num_comments'])
+                #print "\n"
 
             for comment in final_data[0][1]['data']['children']:
 
                 if comment['data'].has_key('author'):
                     comment_data = comment['data']
-                    print "-- Commentario -- "
-                    print "autor : "+str(comment_data['author'])
-                    print "Comment Ups : "+str(comment_data['ups'])
-                    print "Comment Downs : "+str(comment_data['downs'])
+                    #print "-- Commentario -- "
+                    #print "autor : "+str(comment_data['author'])
+                    #print "Comment Ups : "+str(comment_data['ups'])
+                    #print "Comment Downs : "+str(comment_data['downs'])
 
                     self.authors.append(str(comment_data['author']))
             if spinTime >= times :
@@ -75,7 +75,7 @@ class DataFetchr:
         import json, time, urllib2
         
         if redditUsers.users.has_key(rdtUser) and not rescan or rdtUser == "[deleted]":
-                print "User: "+rdtUser+" already scanned!"
+                #print "User: "+rdtUser+" already scanned!"
                 return None
         
         for typeCommentOrSubmit in ['comments','submitted']:
@@ -105,7 +105,7 @@ class DataFetchr:
             for posted in collectedData:
                 userPosted = posted['data']
                 
-                print "\n--- COMMENT User: "+ str(userPosted['author'])+"---"   
+                #print "\n--- COMMENT User: "+ str(userPosted['author'])+"---"   
                 redditUsers.addPost(userPosted,typeCommentOrSubmit)
             
         
@@ -150,22 +150,22 @@ class DataFetchr:
                 htmlTopic = responseTopic.read()
                 final_data.append(json.loads(htmlTopic))
                 topicData = final_data[0][0]['data']['children'][0]['data']
-                print "\n--- Thread---"
-                print "autor :"+str(topicData['author'])
-                print "id Thread :" + str(topicData['id'])
-                print "subreddit Thread :" + str(topicData['subreddit'])
-                print "score Thread :" + str(topicData['score'])
-                print "#comment Thread :" + str(topicData['num_comments'])
-                print "\n"
+                #print "\n--- Thread---"
+                #print "autor :"+str(topicData['author'])
+                #print "id Thread :" + str(topicData['id'])
+                #print "subreddit Thread :" + str(topicData['subreddit'])
+                #print "score Thread :" + str(topicData['score'])
+                #print "#comment Thread :" + str(topicData['num_comments'])
+                #print "\n"
 
             for comment in final_data[0][1]['data']['children']:
 
                 if comment['data'].has_key('author'):
                     comment_data = comment['data']
-                    print "-- Commentario -- "
-                    print "autor : "+str(comment_data['author'])
-                    print "Comment Ups : "+str(comment_data['ups'])
-                    print "Comment Downs : "+str(comment_data['downs'])
+                    #print "-- Commentario -- "
+                    #print "autor : "+str(comment_data['author'])
+                    #print "Comment Ups : "+str(comment_data['ups'])
+                    #print "Comment Downs : "+str(comment_data['downs'])
 
                     self.authors.append(str(comment_data['author']))
             if spinTime >= depth :

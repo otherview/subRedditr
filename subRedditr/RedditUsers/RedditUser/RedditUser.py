@@ -41,7 +41,8 @@ class RedditUser:
             self.commentTrack[idThread] +=1.0
             self.dataset[subreddit] += 1.0/self.commentTrack[idThread]
         else:
-            print "Follow up numa Thread (Valor minorizado)"
+            pass
+            #print "Follow up numa Thread (Valor minorizado)"
         
 
     def addSubmitPost(self, userPosted):
@@ -50,7 +51,8 @@ class RedditUser:
         if not self.posts['submitted'].has_key(userPosted['id']):
             self.posts['submitted'][userPosted['id']] = userPosted
         else:
-            print "Submission: Already added"
+            pass
+            #print "Submission: Already added"
         self.incrementDataset(userPosted['subreddit'],"t3_"+userPosted['id'])
             
     def addCommentPost(self, userPosted):
@@ -59,7 +61,8 @@ class RedditUser:
         if not self.posts['comments'].has_key(userPosted['id']):
             self.posts['comments'][userPosted['id']] = userPosted
         else:
-            print "Comment: Already added"
+            pass
+            #print "Comment: Already added"
         self.incrementDataset(userPosted['subreddit'],userPosted['link_id'])
 
 
