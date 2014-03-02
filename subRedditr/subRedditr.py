@@ -84,7 +84,7 @@ class SubRedditr:
     
     
     
-    def scrape_Tree_subReddit(self, TreeDescription, StartingSubReddit, Depth = 5):
+    def scrape_Tree_subReddit(self, TreeDescription, StartingSubReddit, Depth = 10):
         
         class pilhaTree:
             
@@ -168,46 +168,11 @@ def main():
     
     #Test Auto Scraper
     tree = subRedditr.create_Tree("Scraper Tree at r/Portugal")
-    #subRedditr.scrape_Tree_subReddit("Scraper Tree at r/Portugal","r/portugal")
+    subRedditr.scrape_Tree_subReddit("Scraper Tree at r/Portugal","r/portugal")
     
-    #tree.save_To_File('R-Portugal-Tree.db')
-    tree.load_From_File('R-Portugal-Tree.db')
-    
-    
-    
-    #Test Trees
-    #tree = subRedditr.create_Tree("1st Test Tree")
-    
-    #tree.load_From_File('TestTree.db')
-    #
-    #allUsers = tree.get_users_from_subtree("r/Portugal")
-    #subRedditr.getRecomendations(u'turnusb',RedditUsers=allUsers)
-    #subRedditr.redditUsers = allUsers
-    #subRedditr.evaluateNumberOfPosts(u'turnusb')
-    #tree.add_node("r/Portugal")
-    #
-    #newUsers = subRedditr.fetch_SubReddit("r/Portugal")
-    #new_Scrapped_Users = subRedditr.scrapeUsers(newUsers)
-    #tree.add_Users_To_Node("r/Portugal",new_Scrapped_Users)
-    #
-    #
-    #tree.add_node("r/Brasil")
-    #newUsers = subRedditr.fetch_SubReddit("r/Brasil")
-    #new_Scrapped_Users = subRedditr.scrapeUsers(newUsers)
-    #tree.add_Users_To_Node("r/Brasil",new_Scrapped_Users)
-    #
-    #tree.add_node("r/Games",parent = "r/Portugal")
-    #newUsers = subRedditr.fetch_SubReddit("r/Games")
-    #new_Scrapped_Users = subRedditr.scrapeUsers(newUsers)
-    #tree.add_Users_To_Node("r/Games",new_Scrapped_Users)
-    ##
-    ##tree.add_node("r/IndieGaming", parent = "r/Brasil")
-    ##newUsers = subRedditr.fetch_SubReddit("r/IndieGaming")
-    ##new_Scrapped_Users = subRedditr.scrapeUsers(newUsers)
-    ##tree.add_Users_To_Node("r/IndieGaming",new_Scrapped_Users)
-    #print tree.tree.get_node("r/Portugal").users == tree.tree.get_node("r/Brasil").users
-    #
-    #tree.save_To_File('TestTree.db')
+    tree.save_To_File('R-Portugal-Tree.db')
+    #tree.load_From_File('R-Portugal-Tree.db')
+
     
     
     import treelib
