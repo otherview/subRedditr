@@ -47,22 +47,22 @@ class SubRedditr:
         return
     
     
-    def evaluateRecomendRightSubReddit(self):
+    def evaluateRecomendRightSubReddit(self,redditUsers):
         import Evaluationr.Evaluationr as Evaluationr
         import Recommendationr.Recommendationr as Recommendationr
         
-        self.recomendationr = Recommendationr.Recommendationr(self.redditUsers)
-        self.evaluationr = Evaluationr.Evaluationr(self.redditUsers,self.recomendationr)
+        self.recomendationr = Recommendationr.Recommendationr(redditUsers)
+        self.evaluationr = Evaluationr.Evaluationr(redditUsers,self.recomendationr)
         
         print self.evaluationr.evaluateTopNSubredditRecomendations()
         
         
-    def evaluateNumberOfPosts(self,user):
+    def evaluateNumberOfPosts(self,user,redditUsers):
         import Evaluationr.Evaluationr as Evaluationr
         import Recommendationr.Recommendationr as Recommendationr
         
-        self.recomendationr = Recommendationr.Recommendationr(self.redditUsers)
-        self.evaluationr = Evaluationr.Evaluationr(self.redditUsers,self.recomendationr,)
+        self.recomendationr = Recommendationr.Recommendationr(redditUsers)
+        self.evaluationr = Evaluationr.Evaluationr(redditUsers,self.recomendationr)
         
         print self.evaluationr.evaluateNumberOfPosts(user)
         
@@ -162,16 +162,20 @@ def main():
     #subRedditr.saveUsers()
     #subRedditr.getRecomendations('Popcom')   
     #subRedditr.evaluateRecomendRightSubReddit()
-    #subRedditr.evaluateNumberOfPosts('Popcom')
+    #subRedditr.evaluateNumberOfPosts('Popcom',tree.tree.get_node("r/portugal").users)
     
     
     
     #Test Auto Scraper
     tree = subRedditr.create_Tree("Scraper Tree at r/Portugal")
-    subRedditr.scrape_Tree_subReddit("Scraper Tree at r/Portugal","r/portugal")
     
-    tree.save_To_File('R-Portugal-Tree.db')
-    #tree.load_From_File('R-Portugal-Tree.db')
+    #subRedditr.scrape_Tree_subReddit("Scraper Tree at r/Portugal","r/portugal")
+    #tree.save_To_File('R-Portugal-Tree.db')
+    
+    tree.load_From_File('R-Portugal-Tree.db')
+    subRedditr.getRecomendations('xxsilence',tree.tree.get_node("r/portugal").users)
+    subRedditr.evaluateRecomendRightSubReddit(tree.tree.get_node("r/portugal").users)
+    subRedditr.evaluateNumberOfPosts('xxsilence',tree.tree.get_node("r/portugal").users)
 
     
     
