@@ -129,6 +129,7 @@ class RedditUsers:
         print "Apenas selecionar os que tem alguma interseccao entre utilizadores"
         tmpDataset = dict(("r/"+k, v) for k, v in tmpDataset.items() if v>1.0)
         print "Se sao muitos vamos filtrar os primeiros 3"
+        print "Afinal vamos usa-los todos e dps apenas scrapar os 1os 3"
         maxSubreddits = [sub for sub in sorted(tmpDataset, key = tmpDataset.get)]
         maxSubreddits.reverse()
         if len(maxSubreddits) < 3:
@@ -138,7 +139,7 @@ class RedditUsers:
             for sub in maxSubreddits[:3]:
                 print sub +" -  %f" % tmpDataset[sub]
         
-        return maxSubreddits[:3]
+        return maxSubreddits
         
 
 

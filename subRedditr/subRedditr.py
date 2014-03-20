@@ -15,11 +15,11 @@ class SubRedditr:
     def __init__(self):
         import DataFetchr.DataFetchr as DataFetchr
         import RedditUsers.RedditUsers as RedditUsers
-        from Florest.Florest import Florest 
+        import Florest.Florest as Florest 
         
         self.dataFetchr = DataFetchr.DataFetchr()
         #self.redditUsers = RedditUsers.RedditUsers()
-        self.florest = Florest()
+        self.florest = Florest.Florest()
  
 
 
@@ -121,6 +121,9 @@ class SubRedditr:
                 if not subReddit in [x.name for x in self.pilha]:
                     tmpToParse_Subreddit = self.pilhaElement(subReddit, subRedditParent)
                     self.pilha.append(tmpToParse_Subreddit)
+                    return 1
+                else:
+                    return 0
                     
             
         tmpTree = self.florest.get_Tree(TreeDescription)
@@ -144,9 +147,13 @@ class SubRedditr:
             pilha.parsed(nextSubReddit) 
             tmpTree.add_Users_To_Node(nextSubReddit.name,new_Scrapped_Users)
             
-            
+            nextSubRedditCounter = 0
             for unParsedSubR in tmpTree.tree.get_node(nextSubReddit.name).users.get_Most_Posted_Sub():
-                pilha.add_toParse_Subreddit(unParsedSubR, nextSubReddit)
+                nextSubRedditCounter +=pilha.add_toParse_Subreddit(unParsedSubR, nextSubReddit)
+                if(nextSubRedditCounter ==3):
+                    break
+                
+                
                 
             nextSubReddit = pilha.getNext()
         
@@ -156,36 +163,57 @@ class SubRedditr:
     
     
 def main():
+    testTree = test_Create_Scrape_SubReddit()
+    
+    #testTree = test_Load_Tree()
+    
+    #test_dataViewer(testTree)
+    
+    #testTree = test_recomendation_user()
+
+
+    return
+
+
+def test_Create_Scrape_SubReddit():
+    '''Test Auto Scraper'''
+     
     subRedditr = SubRedditr()
-    #newUsers = subRedditr.fetchMoreUsers()
-    #subRedditr.scrapeUsers(newUsers)
-    #subRedditr.saveUsers()
-    #subRedditr.getRecomendations('Popcom')   
-    #subRedditr.evaluateRecomendRightSubReddit()
-    #subRedditr.evaluateNumberOfPosts('Popcom',tree.tree.get_node("r/portugal").users)
+    treeDescription = "Scraper Tree at Best Topic of Today"
+    tree = subRedditr.create_Tree(treeDescription)
     
+    subRedditr.scrape_Tree_subReddit(treeDescription,"r/worldnews")
+    tree.save_To_File('Best-Today-Tree.db')
+    return tree
     
+def test_Load_Tree():
+    subRedditr = SubRedditr()
+    treeDescription = "Scraper Tree at Best Topic of Today"
+    tree = subRedditr.create_Tree(treeDescription)
+    tree.load_From_File('Best-Today-Tree.db')
+    return tree
     
-    #Test Auto Scraper
-    tree = subRedditr.create_Tree("Scraper Tree at r/Portugal")
+def test_recomendation_user():
     
-    #subRedditr.scrape_Tree_subReddit("Scraper Tree at r/Portugal","r/portugal")
-    #tree.save_To_File('R-Portugal-Tree.db')
+    subRedditr = SubRedditr()
+    treeDescription = "Scraper Tree at Best Topic of Today"
+    tree = subRedditr.create_Tree(treeDescription)
+    tree.load_From_File('Best-Today-Tree.db')
     
-    tree.load_From_File('R-Portugal-Tree.db')
     subRedditr.getRecomendations('xxsilence',tree.tree.get_node("r/portugal").users)
     subRedditr.evaluateRecomendRightSubReddit(tree.tree.get_node("r/portugal").users)
     subRedditr.evaluateNumberOfPosts('xxsilence',tree.tree.get_node("r/portugal").users)
+    
+    return tree
 
+def test_dataViewer():
+    '''Data Viewer Test'''
     
+    from DataViewer.DataViewer import DataViewer
+    dataViewer = DataViewer(tree.tree.get_node("r/worldnews").users.users)
+    dataViewer.writeData("testeBonito")
     
-    import treelib
-    for node in tree.tree.expand_tree(mode=treelib.Tree.ZIGZAG):
-        print tree.tree[node].identifier
-        print tree.tree[node].users
-        print "------------------"
-    tree.tree.show()
-    return
+    return 
     
 if __name__ == '__main__':
     main()
