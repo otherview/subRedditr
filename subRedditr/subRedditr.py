@@ -84,7 +84,7 @@ class SubRedditr:
     
     
     
-    def scrape_Tree_subReddit(self, TreeDescription, StartingSubReddit, Depth = 10):
+    def scrape_Tree_subReddit(self, TreeDescription, StartingSubReddit, Depth = 40):
         
         class pilhaTree:
             
@@ -167,7 +167,7 @@ def main():
     
     #testTree = test_Load_Tree()
     
-    #test_dataViewer(testTree)
+    test_dataViewer(testTree)
     
     #testTree = test_recomendation_user()
 
@@ -182,7 +182,7 @@ def test_Create_Scrape_SubReddit():
     treeDescription = "Scraper Tree at Best Topic of Today"
     tree = subRedditr.create_Tree(treeDescription)
     
-    subRedditr.scrape_Tree_subReddit(treeDescription,"r/worldnews")
+    subRedditr.scrape_Tree_subReddit(treeDescription,"r/technology")
     tree.save_To_File('Best-Today-Tree.db')
     return tree
     
@@ -206,12 +206,12 @@ def test_recomendation_user():
     
     return tree
 
-def test_dataViewer():
+def test_dataViewer(treeData):
     '''Data Viewer Test'''
     
     from DataViewer.DataViewer import DataViewer
-    dataViewer = DataViewer(tree.tree.get_node("r/worldnews").users.users)
-    dataViewer.writeData("testeBonito")
+    dataViewer = DataViewer(treeData.tree.get_node("r/technology").users.users)
+    dataViewer.writeData("apenas_r_technology")
     
     return 
     
